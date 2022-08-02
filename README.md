@@ -22,7 +22,7 @@ pip install pyspark
 ```
 
 ## Introduction
-The examples for this sectionn are available in [the introduction file](introduction.py).
+The examples for this section are available in [the Pandas introduction file](introduction_pandas.py) and [the Pyspark introduction file](introduction_pyspark.py).
 
 ### Creating DataFrames
 Let's start with creating an empty DataFrame:
@@ -81,6 +81,56 @@ which will yield the following:
 +-----+---+---+---+
 ```
 
-### Selecting Columns
+### Dropping or Selecting Columns
 
-Often, we may want to limit the columns we are working with on a DataFrame
+Often, we may want to limit the columns we are working with on a DataFrame, this can be accomplished by either dropping columns you don't need or selecting columns you need.
+
+In pandas, selecting columns is done by:
+```python
+subset_df = df[["a", "b"]]
+print(subset_df)
+```
+which yields:
+```bash
+   a  b
+1  4  7
+2  5  8
+3  6  9
+```
+Note that you are whether you are selecting multiple columns or a single column, we pass a list into the dataframe selector with the names of the columns you want to select.
+
+Dropping columns is achieved by:
+```python
+subset_df = df.drop(columns=["a"])
+print(subset_df)
+```
+which yields:
+```python
+   b   c
+1  7  10
+2  8  11
+3  9  12
+```
+
+In Pyspark, the syntax for selection is:
+```python
+subset_sparkdf = spark_df.select("a", "b")
+subset_sparkdf.show()
+```
+which yields:
+```bash
++---+---+
+|  a|  b|
++---+---+
+|  4|  7|
+|  5|  8|
+|  6|  9|
++---+---+
+```
+Note that the selection does not take a list, each column is a separate parameter.
+
+Dropping is accomplished similarly:
+```python
+subset_sparkdf = spark_df.drop("a", "b")
+subset_sparkdf.show()
+```

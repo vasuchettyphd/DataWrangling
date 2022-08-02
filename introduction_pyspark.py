@@ -1,19 +1,9 @@
+# Pyspark
 from pyspark.sql import SparkSession
-import pandas as pd
-
-df = pd.DataFrame(
-    {
-        "a": [4, 5, 6],
-        "b": [7, 8, 9],
-        "c": [10, 11, 12]
-    },
-    index = [1, 2, 3]
-)
-
-print(df)
 
 spark = SparkSession.builder.appName('datawrangler').getOrCreate()
 
+# Create DataFrame
 spark_df = spark.createDataFrame(
     [
         (1, 4, 7, 10),
@@ -22,5 +12,12 @@ spark_df = spark.createDataFrame(
     ],
     ["index", "a", "b", "c"]
 )
-
 spark_df.show()
+
+# Select columns
+subset_sparkdf = spark_df.select("a", "b")
+subset_sparkdf.show()
+
+# Drop columns
+subset_sparkdf = spark_df.drop("a", "b")
+subset_sparkdf.show()
