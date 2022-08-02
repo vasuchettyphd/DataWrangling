@@ -1,14 +1,13 @@
 # Data Wrangling Tutorial in Python: Pandas vs. Pyspark
 
 ## Table of Contents
-1. [Getting started: Installation of required libraries](#installation)
+1. [Getting started: Installation of required libraries](#getting-started-installation-of-required-libraries)
 2. [Introduction](#introduction)
     1. [Creating DataFrames](#creating-dataframes)
-    2. [Dropping or Selecting Columns](#dropping-selecting)
-    3. [Renaming Columns](#renaming)
+    2. [Dropping or Selecting Columns](#dropping-or-selecting-columns)
+    3. [Renaming Columns](#renaming-columns)
 
 ## Getting started: Installation of required libraries
-<a name="installation"></a>
 In order to ensure pandas is installed
 ```bash
 pip install pandas
@@ -30,11 +29,9 @@ pip install pyspark
 ```
 
 ## Introduction
-<a name="introduction"></a>
 The examples for this section are available in [the Pandas introduction file](introduction_pandas.py) and [the Pyspark introduction file](introduction_pyspark.py).
 
 ### Creating DataFrames
-<a name="creating-dataframes"></a>
 Let's start with creating an empty DataFrame:
 
 In pandas we can do it with:
@@ -92,7 +89,6 @@ which will yield the following:
 ```
 
 ### Dropping or Selecting Columns
-<a name="dropping-selecting"></a>
 Often, we may want to limit the columns we are working with on a DataFrame, this can be accomplished by either dropping columns you don't need or selecting columns you need.
 
 In pandas, selecting columns is done by:
@@ -156,7 +152,6 @@ which yields:
 ```
 
 ### Renaming Columns
-<a name="renaming"></a>
 In pandas, we rename columns using a dictionary that maps old column names to new columns:
 ```python
 renamed_df = df.rename(columns={
