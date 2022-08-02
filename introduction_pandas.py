@@ -19,3 +19,10 @@ print(subset_df)
 # Drop columns
 subset_df = df.drop(columns=["a"])
 print(subset_df)
+
+# Rename columns
+renamed_df = df.rename(columns={
+    "a": "column1",
+    "b": "column2"
+})
+print(renamed_df)

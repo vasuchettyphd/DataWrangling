@@ -134,3 +134,73 @@ Dropping is accomplished similarly:
 subset_sparkdf = spark_df.drop("a", "b")
 subset_sparkdf.show()
 ```
+which yields:
+```bash
++-----+---+
+|index|  c|
++-----+---+
+|    1| 10|
+|    2| 11|
+|    3| 12|
++-----+---+
+```
+
+### Renaming Columns
+In pandas, we rename columns using a dictionary that maps old column names to new columns:
+```python
+renamed_df = df.rename(columns={
+    "a": "column1",
+    "b": "column2"
+})
+print(renamed_df)
+```
+which yields:
+```bash
+ column1  column2   c
+1        4        7  10
+2        5        8  11
+3        6        9  12
+```
+
+Renaming columns in pyspark is a little trickier. If you only want to rename one column you can do the following:
+```python
+renamed_sparkdf = spark_df.withColumnRenamed("a", "column1")
+renamed_sparkdf.show()
+```
+which yields:
+```bash
++-----+-------+---+---+
+|index|column1|  b|  c|
++-----+-------+---+---+
+|    1|      4|  7| 10|
+|    2|      5|  8| 11|
+|    3|      6|  9| 12|
++-----+-------+---+---+
+```
+which can be repeated multiple times for multiple columns. 
+
+Another method is just to pass a list of new column names to rename all columns:
+```python
+column_list = ["index", "column1", "column2", "c"]
+renamed_sparkdf = spark_df.toDF(*column_list)
+renamed_sparkdf.show()
+```
+which yields:
+```bash
++-----+-------+-------+---+
+|index|column1|column2|  c|
++-----+-------+-------+---+
+|    1|      4|      7| 10|
+|    2|      5|      8| 11|
+|    3|      6|      9| 12|
++-----+-------+-------+---+
+```
+
+Finally, you can also rename columns in pyspark when selecting them by aliasing them:
+
+```python
+import pyspark.sql.functions as F
+renamed_sparkdf = spark_df.select("index", F.col("a").alias("column1"), F.col("b").alias("column2"), "c")
+renamed_sparkdf.show()
+```
+which yields the same results as above.

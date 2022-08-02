@@ -21,3 +21,15 @@ subset_sparkdf.show()
 # Drop columns
 subset_sparkdf = spark_df.drop("a", "b")
 subset_sparkdf.show()
+
+# Rename columns
+renamed_sparkdf = spark_df.withColumnRenamed("a", "column1")
+renamed_sparkdf.show()
+
+column_list = ["index", "column1", "column2", "c"]
+renamed_sparkdf = spark_df.toDF(*column_list)
+renamed_sparkdf.show()
+
+import pyspark.sql.functions as F
+renamed_sparkdf = spark_df.select("index", F.col("a").alias("column1"), F.col("b").alias("column2"), "c")
+renamed_sparkdf.show()
