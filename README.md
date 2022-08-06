@@ -6,6 +6,7 @@
     1. [Creating DataFrames](#creating-dataframes)
     2. [Dropping or Selecting Columns](#dropping-or-selecting-columns)
     3. [Renaming Columns](#renaming-columns)
+3. [More Advanced Techniques](#more-advanced-techniques)
 
 ## Getting started: Installation of required libraries
 In order to ensure pandas is installed
@@ -210,3 +211,23 @@ renamed_sparkdf = spark_df.select("index", F.col("a").alias("column1"), F.col("b
 renamed_sparkdf.show()
 ```
 which yields the same results as above.
+
+## Data Manipulation Techniques
+Now that we've got the basics down, it is time to move onto more advanced techniques in pandas and pyspark.
+
+### Filtering rows
+
+```python
+filtered_df = df.loc[df["b"] >= 8]
+print(filtered_df)
+```
+
+### Joins
+
+### Groupby
+
+### Concatenation
+
+## More Advanced Techniques
+
+### Indices: Sorting, Resetting, and Multiple Indices

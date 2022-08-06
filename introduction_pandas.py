@@ -26,3 +26,7 @@ renamed_df = df.rename(columns={
     "b": "column2"
 })
 print(renamed_df)
+
+# Filter
+filtered_df = df.loc[df["b"] >= 8]
+print(filtered_df)
